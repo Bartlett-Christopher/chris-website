@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 Django settings for project project.
 
@@ -37,6 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # project apps
+    'authentication',
 ]
 
 MIDDLEWARE = [
@@ -75,15 +79,37 @@ WSGI_APPLICATION = 'project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'HOST': '',
+        'NAME': 'chris',
+        'USER': '',
+        'PASSWORD': '',
+        'POST': '5432',
+        'CONN_MAX_AGE': 0,
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ATOMIC_REQUESTS': True,
     }
 }
 
+# Internationalization
+# https://docs.djangoproject.com/en/2.1/topics/i18n/
+
+LANGUAGE_CODE = 'en-gb'
+TIME_ZONE = 'UTC'
+USE_I18N = True
+USE_L10N = True
+USE_TZ = True
+
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/2.1/howto/static-files/
+
+STATIC_URL = '/static/'
+
+# * -- AUTH -- *
+AUTH_USER_MODEL = 'authentication.User'
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -99,22 +125,10 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+PASSWORD_HASHERS = [
+    'django.contrib.auth.hashers.Argon2PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
+    'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
+]
 
-# Internationalization
-# https://docs.djangoproject.com/en/2.1/topics/i18n/
-
-LANGUAGE_CODE = 'en-us'
-
-TIME_ZONE = 'UTC'
-
-USE_I18N = True
-
-USE_L10N = True
-
-USE_TZ = True
-
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/2.1/howto/static-files/
-
-STATIC_URL = '/static/'

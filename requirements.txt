@@ -1,2 +1,5 @@
+argon2_cffi==18.3.0
 Django==2.1.2
+django-dynamic-fixture==2.0.0
 psycopg2==2.7.5
+six==1.11.0
