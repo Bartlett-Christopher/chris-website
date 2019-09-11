@@ -1,14 +1,17 @@
 # -*- coding: utf-8 -*-
 """
 .. module: home.views.landing
-  :synopsis: view for main landing page
-.. module author: Chris Bartlett <bartlett.christopher.p@gmail.com>
+  :synopsis: Home page LandingView
+
+.. moduleauthor:: Chris Bartlett <bartlett.christopher.p@gmail.com>
 """
-from django.views.generic import TemplateView
+from .base import BaseView
 
 
-class LandingView(TemplateView):
+class LandingView(BaseView):
     """
     View for main landing page
     """
     template_name = 'home/landing.html'
+
+    pass
