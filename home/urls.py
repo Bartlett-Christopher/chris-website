@@ -6,11 +6,9 @@
 """
 from django.urls import path
 
-from home.views.about import AboutView
 from home.views.landing import LandingView
 
 
 urlpatterns = [
     path('', LandingView.as_view(), name='landing'),
-    path('about/', AboutView.as_view(), name='about'),
 ]
