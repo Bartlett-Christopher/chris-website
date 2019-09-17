@@ -15,4 +15,42 @@ class StaticPageAdmin(admin.ModelAdmin):
     """
     Admin class for StaticPage
     """
-    pass
+    fieldsets = (
+        (None, {
+            'fields': (
+                'enabled',
+                'url',
+                'title',
+                'template_name',
+                'content'
+            )
+        }),
+        ('Dates', {
+            'fields': (
+                'created',
+                'modified'
+            )
+        })
+    )
+    list_display = (
+        'title',
+        'url',
+        'template_name',
+        'enabled',
+        'modified'
+    )
+    list_filter = (
+        'enabled',
+    )
+    list_editable = (
+        'enabled',
+    )
+    readonly_fields = (
+        'created',
+        'modified'
+    )
+    search_fields = (
+        'url',
+        'title',
+        'content'
+    )
