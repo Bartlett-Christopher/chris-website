@@ -5,8 +5,9 @@
 
 .. moduleauthor:: Chris Bartlett <chris.bartlett@therealbuzzgroup.com>
 """
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader, RequestContext
+from django.urls import reverse
 from django.views.generic import View
 
 from staticpages.exceptions import StaticPageNotFound
@@ -29,12 +30,17 @@ class StaticPageView(View):
         :type request: django.http.HttpRequest
         :return: the static page response
         :rtype: django.http.HttpResponse
+        :raises: staticpages.exceptions.StaticPageNotFound
         """
         url = kwargs.get('url', None)
         if not url:
             raise StaticPageNotFound
 
         self.page = StaticPage.get_page(url=url)
+
+        if not self.page.enabled:
+            # change this to return a 'content has moved' like page
+            return HttpResponseRedirect(reverse('landing'))
 
         handler = getattr(self, request.method.lower(), None)
         handler = handler or self.http_method_not_allowed

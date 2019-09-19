@@ -6,6 +6,7 @@
 .. moduleauthor:: Chris Bartlett <chris.bartlett@therealbuzzgroup.com>
 """
 from django.contrib import admin
+from django.utils.safestring import mark_safe
 
 from staticpages.models.staticpage import StaticPage
 
@@ -37,7 +38,8 @@ class StaticPageAdmin(admin.ModelAdmin):
         'url',
         'template_name',
         'enabled',
-        'modified'
+        'modified',
+        'view_on_site'
     )
     list_filter = (
         'enabled',
@@ -54,3 +56,22 @@ class StaticPageAdmin(admin.ModelAdmin):
         'title',
         'content'
     )
+
+    def view_on_site(self, obj):
+        """
+        Construct link for the admin list view to view static page on the site
+
+        :param obj: the static page object
+        :type obj: staticpages.models.StaticPage
+        :return: link to view the static page
+        :rtype: django.utils.safestring.SafeText
+        """
+        link = '''<a href="{url}" target="_blank">{text}</a>'''.format(
+            url=self.get_view_on_site_url(obj),
+            text='View on site'
+        )
+        return mark_safe(link)
+
+    def get_view_on_site_url(self, obj=None):
+        """ Override of BaseModelAdmin to return static page url """
+        return obj.url
