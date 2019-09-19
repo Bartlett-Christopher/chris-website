@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-.. module:: staticpages.models.staticpage
+.. module:: staticpages.models.page
    :synopsis: Model to describe a static web page
 
 .. moduleauthor:: Chris Bartlett <chris.bartlett@therealbuzzgroup.com>
@@ -13,13 +13,11 @@ from django.dispatch import receiver
 from django.utils.translation import ugettext_lazy as _
 
 from common.mixins import EnabledMixin, TimeStampMixin
-from staticpages.exceptions import StaticPageNotFound
+from staticpages.exceptions import PageNotFound
 
 
-class StaticPage(TimeStampMixin, EnabledMixin, models.Model):
-    """
-    Model to describe a static web page
-    """
+class Page(TimeStampMixin, EnabledMixin, models.Model):
+    """ Model to describe a static web page """
     url = models.CharField(
         verbose_name=_('URL'),
         max_length=255,
@@ -55,47 +53,61 @@ class StaticPage(TimeStampMixin, EnabledMixin, models.Model):
     class Meta:
         """ Metadata for StaticPage model """
         app_label = 'staticpages'
-        verbose_name = _('Static page')
-        verbose_name_plural = _('Static pages')
+        verbose_name = _('Page')
+        verbose_name_plural = _('Pages')
 
     @classmethod
     def get_page(cls, url):
         """
-        Get the StaticPage object provided a url
+        Get the Page object provided a url
 
         :param url: static page url
         :type url: str
-        :return: the StaticPage
-        :rtype: staticpages.models.staticpage.StaticPage
-        :raises: staticpages.exceptions.StaticPageNotFound
+        :return: the Page
+        :rtype: staticpages.models.page.Page
+        :raises: staticpages.exceptions.PageNotFound
         """
+        clean_url = cls.process_url(url)
         try:
-            page = cls.objects.get(url=url)
+            page = cls.objects.get(url=clean_url)
         except cls.DoesNotExist:
-            raise StaticPageNotFound
+            raise PageNotFound
 
         return page
 
+    @staticmethod
+    def process_url(url):
+        """
+        Process the static page URL ensuring it starts and ends with '/'
 
-@receiver(pre_save, sender=StaticPage)
+        :param url: the provided static page URL
+        :type url: str
+        :return: the final static page URL with starting and trailing '/'
+        """
+        if not url.startswith('/'):
+            url = '/' + url
+
+        if not url.endswith('/'):
+            url += '/'
+
+        return url
+
+
+
+@receiver(pre_save, sender=Page)
 def pre_save_static_page(sender, instance, **kwargs):
     """
-    Pre-save signal handler for StaticPage model
+    Pre-save signal handler for Page model
     - append '/' to start and end of URLs (if necessary) for Django
     - set the default template name if none given
 
-    :param sender:
-    :param instance:
-    :param kwargs:
-    :return:
+    :param sender: sender class
+    :type sender: staticpages.models.page.Page
+    :param instance: model instance being saved
+    :type sender: staticpages.models.page.Page
+    :param kwargs: not used
     """
-    if not instance.url.startswith('/'):
-        # no starting slash for Django, add it
-        instance.url = '/' + instance.url
-
-    if not instance.url.endswith('/'):
-        # no trailing slash for Django, add it
-        instance.url += '/'
+    instance.url = sender.process_url(instance.url)
 
     if instance.template_name is None:
         # we are not specifying a template override, set default

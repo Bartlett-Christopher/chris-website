@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='StaticPage',
+            name='Page',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('enabled', models.BooleanField(default=True, verbose_name='Enabled?')),
@@ -25,8 +25,8 @@ class Migration(migrations.Migration):
                 ('template_name', models.CharField(blank=True, help_text='The relative path describing which template to use. If not set will default to /staticpages/page.html', max_length=255, null=True, verbose_name='Template name')),
             ],
             options={
-                'verbose_name': 'Static page',
-                'verbose_name_plural': 'Static pages',
+                'verbose_name': 'Page',
+                'verbose_name_plural': 'Pages',
             },
         ),
     ]

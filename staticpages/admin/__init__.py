@@ -5,4 +5,4 @@
 
 .. moduleauthor:: Chris Bartlett <chris.bartlett@therealbuzzgroup.com>
 """
-from staticpages.admin.staticpage import StaticPageAdmin
+from staticpages.admin.page import PageAdmin

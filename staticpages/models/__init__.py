@@ -5,4 +5,4 @@
 
 .. moduleauthor:: Chris Bartlett <chris.bartlett@therealbuzzgroup.com>
 """
-from staticpages.models.staticpage import StaticPage
+from staticpages.models.page import Page

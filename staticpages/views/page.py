@@ -1,20 +1,20 @@
 # -*- coding: utf-8 -*-
 """
-.. module:: staticpages.views.staticpage
+.. module:: staticpages.views.page
    :synopsis: view to return a static page
 
 .. moduleauthor:: Chris Bartlett <chris.bartlett@therealbuzzgroup.com>
 """
 from django.http import HttpResponse, HttpResponseRedirect
-from django.template import loader, RequestContext
+from django.template import loader
 from django.urls import reverse
 from django.views.generic import View
 
-from staticpages.exceptions import StaticPageNotFound
-from staticpages.models.staticpage import StaticPage
+from staticpages.exceptions import PageNotFound
+from staticpages.models.page import Page
 
 
-class StaticPageView(View):
+class PageView(View):
     """ View class for static pages """
 
     def __init__(self, *args, **kwargs):
@@ -30,17 +30,16 @@ class StaticPageView(View):
         :type request: django.http.HttpRequest
         :return: the static page response
         :rtype: django.http.HttpResponse
-        :raises: staticpages.exceptions.StaticPageNotFound
+        :raises: staticpages.exceptions.PageNotFound
         """
         url = kwargs.get('url', None)
         if not url:
-            raise StaticPageNotFound
+            raise PageNotFound
 
-        self.page = StaticPage.get_page(url=url)
+        self.page = Page.get_page(url=url)
 
         if not self.page.enabled:
-            # change this to return a 'content has moved' like page
-            return HttpResponseRedirect(reverse('landing'))
+            self.page = Page.get_page(url='page-removed')
 
         handler = getattr(self, request.method.lower(), None)
         handler = handler or self.http_method_not_allowed

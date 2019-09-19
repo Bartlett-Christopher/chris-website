@@ -1,20 +1,20 @@
 # -*- coding: utf-8 -*-
 """
-.. module:: staticpages.admin.staticpage
-   :synopsis: Admin class for StaticPage model
+.. module:: staticpages.admin.page
+   :synopsis: Admin class for Page model
 
 .. moduleauthor:: Chris Bartlett <chris.bartlett@therealbuzzgroup.com>
 """
 from django.contrib import admin
 from django.utils.safestring import mark_safe
 
-from staticpages.models.staticpage import StaticPage
+from staticpages.models.page import Page
 
 
-@admin.register(StaticPage)
-class StaticPageAdmin(admin.ModelAdmin):
+@admin.register(Page)
+class PageAdmin(admin.ModelAdmin):
     """
-    Admin class for StaticPage
+    Admin class for Page model
     """
     fieldsets = (
         (None, {
@@ -62,7 +62,7 @@ class StaticPageAdmin(admin.ModelAdmin):
         Construct link for the admin list view to view static page on the site
 
         :param obj: the static page object
-        :type obj: staticpages.models.StaticPage
+        :type obj: staticpages.models.Page
         :return: link to view the static page
         :rtype: django.utils.safestring.SafeText
         """
@@ -73,5 +73,10 @@ class StaticPageAdmin(admin.ModelAdmin):
         return mark_safe(link)
 
     def get_view_on_site_url(self, obj=None):
-        """ Override of BaseModelAdmin to return static page url """
-        return obj.url
+        """
+        Override of BaseModelAdmin to return static page url if available
+
+        :param obj: static page or None
+        :type obj: staticpages.models.page.Page or NoneType
+        """
+        return obj.url if obj else None

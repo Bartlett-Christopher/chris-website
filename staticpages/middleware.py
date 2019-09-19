@@ -6,8 +6,8 @@
 .. moduleauthor:: Chris Bartlett <chris.bartlett@therealbuzzgroup.com>
 """
 from common.mixins.middleware import MiddlewareMixin
-from staticpages.exceptions import BaseStaticPageException
-from staticpages.views.staticpage import StaticPageView
+from staticpages.exceptions import BasePageException
+from staticpages.views.page import PageView
 
 
 class StaticPageCaptureMiddleware(MiddlewareMixin, object):
@@ -21,18 +21,22 @@ class StaticPageCaptureMiddleware(MiddlewareMixin, object):
         """
         If the response is a 404, check for a static page and return it,
         otherwise fall through
-        :param request:
-        :param response:
-        :return:
+
+        :param request: the current request
+        :type request: django.http.HttpRequest
+        :param response: the 404 response
+        :type response: django.http.HttpResponse
+        :return: the static page response
+        :rtype: django.http.HttpResponse
         """
         if response.status_code != 404:
             return response
 
-        view = StaticPageView()
+        view = PageView()
 
         try:
             response = view.dispatch(request, url=request.path_info)
-        except BaseStaticPageException:
+        except BasePageException:
             return response
 
         return response
