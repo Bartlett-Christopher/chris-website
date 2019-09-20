@@ -2,6 +2,7 @@ argon2_cffi==18.3.0
 Django==2.2.5
 django-ckeditor==5.7.1
 django-dynamic-fixture==2.0.0
+django-webtest==1.9.7
 psycopg2==2.7.5
 psycopg2-binary==2.7.5
 six==1.11.0

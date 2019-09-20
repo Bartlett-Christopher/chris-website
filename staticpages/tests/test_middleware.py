@@ -5,14 +5,17 @@
 
 .. moduleauthor:: Chris Bartlett <chris.bartlett@therealbuzzgroup.com>
 """
-from unittest import We
 from unittest.mock import create_autospec, patch
 
 from django.http import HttpResponse, HttpResponseNotFound
 from django.test import RequestFactory, TestCase
+from django.urls import reverse
+from django_dynamic_fixture import G
+from django_webtest import WebTest
 
 from staticpages.exceptions import PageNotFound
 from staticpages.middleware import StaticPageCaptureMiddleware
+from staticpages.models.page import Page
 from staticpages.views.page import PageView
 
 
@@ -70,4 +73,70 @@ class TestStaticPageCaptureMiddleware(TestCase):
         view.dispatch.assert_called_once_with(
             self.request,
             url=self.request.path_info
+        )
+
+
+class TestIntegrationStaticPageCaptureMiddleware(WebTest):
+    """ Webtest class for StaticPageCaptureMiddleware """
+
+    @classmethod
+    def setUpClass(cls):
+        super(TestIntegrationStaticPageCaptureMiddleware, cls).setUpClass()
+        cls.default_page = G(
+            Page,
+            url='page-removed',
+            title='Page removed',
+            fill_nullable_fields=False
+        )
+
+    def test_response_200(self):
+        home = reverse('landing')
+
+        response = self.app.get(home)
+
+        self.assertEqual(response.status_code, 200)
+
+    def test_response_404_no_static_page(self):
+        url = '/definitely-does-not-exist/'
+
+        response = self.app.get(url, status=404)
+
+        self.assertEqual(response.status_code, 404)
+        self.assertIn(
+            'Page not found',
+            response.html.text
+        )
+
+    def test_response_404_static_page_found_disabled(self):
+        static_page = G(
+            Page,
+            url='static-page',
+            title='Static Page',
+            enabled=False,
+            fill_nullable_fields=False
+        )
+
+        response = self.app.get(static_page.url)
+
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(
+            'Page removed',
+            response.html.text
+        )
+
+    def test_response_404_static_page_found_enabled(self):
+        static_page = G(
+            Page,
+            url='static-page',
+            title='Static page',
+            enabled=True,
+            fill_nullable_fields=False
+        )
+
+        response = self.app.get(static_page.url)
+
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(
+            'Static page',
+            response.html.text
         )
