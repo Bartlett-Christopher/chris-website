@@ -1,14 +1,13 @@
 # -*- coding: utf-8 -*-
 """
-.. module: authentication.tests.test_manager
-  :synopsis: Unit tests for User Manager
+:synopsis: tests for User manager.
 
-.. moduleauthor:: Chris Bartlett <bartlett.christopher.p@gmail.com>
+.. module: authentication.tests.test_manager
+.. author: Chris Bartlett <bartlett.christopher.p@gmail.com>
 """
 from django.test import TestCase
 from django_dynamic_fixture import G
 
-from authentication.manager import UserManager
 from authentication.models import User
 
 
@@ -35,7 +34,11 @@ class TestUserManager(TestCase):
     def test__create_user_1(self):
         """ Test no email given raises ValueError """
         with self.assertRaisesMessage(ValueError, 'Email must be set'):
-            User.objects._create_user(email='', password='', is_superuser=False)
+            User.objects._create_user(
+                email='',
+                password='',
+                is_superuser=False
+            )
 
     def test__create_user_2(self):
         """ Test create normal User no extra data """

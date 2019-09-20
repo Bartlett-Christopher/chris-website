@@ -2,3 +2,5 @@
 *.pyo
 .idea
 db.sqlite3
+.coverage
+quality
