@@ -2,5 +2,6 @@
 *.pyo
 .idea
 db.sqlite3
+.theia/*
 .coverage
-quality
+quality/config.txt
