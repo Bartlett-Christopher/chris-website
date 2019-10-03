@@ -11,6 +11,8 @@ django-extensions==2.2.1
 coverage==4.5.4
 flake8==3.7.8  # (pep8 + pyflakes)
 pydocstyle==4.0.1
+pylint==2.4.2
+pylint-django==2.0.11
 
 # ** testing **
 django-dynamic-fixture==2.0.0

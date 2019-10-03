@@ -27,8 +27,13 @@ class LintIssue(object):
     )
 
     REGEX_PYDOCSTYLE = re.compile(
-        r'(?P<module>.+):(?P<line>\d+)\s(?P<class>.+):\s+'
-        r'(?P<code>[a-zA-Z]\d+):\s(?P<msg>.*)'
+        r'(?P<module>.+):(?P<line>\d+)\s+(?P<class>.+):\s+'
+        r'(?P<code>[a-zA-Z]\d+):\s+(?P<msg>.*)'
+    )
+
+    REGEX_PYLINT = re.compile(
+        r'(?P<module>.+[.py]):(?P<line>\d+):(?P<col>\d+):\s+'
+        r'(?P<code>[A-Z]\d+):\s+(?P<msg>.*)'
     )
 
     FLAKE8_TYPE_MAP = {
@@ -104,6 +109,27 @@ class LintIssue(object):
             type_=cls.PYDOCSTYLE_TYPE_MAP.get(code[1], 'unknown')
         )
 
+    @classmethod
+    def from_pylint(cls, issue):
+        """
+        Return a LintIssue from pylint.
+
+        :param issue: the pylint issue output
+        :type issue: re.MatchObject
+        :return: lint issue
+        :rtype: quality.lint.LintIssue
+        """
+        code = issue.group('code')
+        return LintIssue(
+            module=issue.group('module'),
+            line=issue.group('line'),
+            col=issue.group('col'),
+            code=code,
+            message=issue.group('msg'),
+            src='pylint',
+            type_=cls.PYLINT_TYPE_MAP.get(code[0], 'unknown')
+        )
+
     def __init__(self, module, line, col, code, message, src, type_):
         """Lint runner Issue."""
         super(LintIssue, self).__init__()
@@ -149,7 +175,9 @@ class Command(BaseCommand):
     PROJECT_DIR = os.path.abspath(os.path.join(__file__, '../../'))
     PYTHON_PATH = os.path.dirname(sys.executable)
 
-    ALL_LINTERS = ['flake8', 'pydocstyle']
+    ALL_LINTERS = ['flake8', 'pydocstyle', 'pylint']
+
+    PYLINT_IGNORE = ['migrations', 'urls']
 
     help = 'Lint runner - a code quality checker.'
 
@@ -159,7 +187,8 @@ class Command(BaseCommand):
         self.result = None
         self.apps = self.collect_project_apps()
 
-    def collect_project_apps(self):
+    @staticmethod
+    def collect_project_apps():
         """
         Gather all importable project apps into set.
 
@@ -213,7 +242,7 @@ class Command(BaseCommand):
         for lint_cleaner in options['linters']:
             construct_command = getattr(
                 self,
-                'construct_{linter}_command'.format(linter=lint_cleaner),
+                f'construct_{lint_cleaner}_command',
                 None
             )
             if callable(construct_command):
@@ -229,7 +258,7 @@ class Command(BaseCommand):
         :rtype: list
         """
         flake8 = [
-            "{python}/flake8".format(python=self.PYTHON_PATH),
+            f"{self.PYTHON_PATH}/flake8",
             "--exclude=migrations",
             "<app placeholder>"
         ]
@@ -243,7 +272,7 @@ class Command(BaseCommand):
         :rtype: list
         """
         pydocstyle = [
-            "{python}/pydocstyle".format(python=self.PYTHON_PATH),
+            f"{self.PYTHON_PATH}/pydocstyle",
             "<app placeholder>"
         ]
         return 'pydocstyle', pydocstyle
@@ -255,8 +284,14 @@ class Command(BaseCommand):
         :return: pylint command
         :rtype: list
         """
+        rcfile = os.path.join(settings.PROJECT_DIR, 'quality/.pylintrc')
         pylint = [
-            "{python}/pylint".format(python=self.PYTHON_PATH),
+            f"{self.PYTHON_PATH}/pylint",
+            '--load-plugins', 'pylint_django',
+            f"--ignore={','.join(self.PYLINT_IGNORE)}",
+            '--score=n',  # hide score display
+            '--jobs=0',  # optimise number of processors
+            f'--rcfile={rcfile}',
             "<app placeholder>"
         ]
         return 'pylint', pylint
