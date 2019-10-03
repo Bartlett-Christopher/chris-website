@@ -18,7 +18,7 @@ from django.utils.encoding import force_text
 from common.utils.terminal import Terminal
 
 
-class LintIssue(object):
+class LintIssue:
     """Process lint runner errors."""
 
     REGEX_FLAKE8 = re.compile(
@@ -158,11 +158,11 @@ class LintIssue(object):
                f')'
 
     @property
-    def ok(self):
+    def acceptable(self):
         """
         Return if the Issue is below the threshold severity.
 
-        :return: issue OK or not
+        :return: issue acceptable or not
         :rtype: bool
         """
         return self.SEVERITY.get(self.type_, 10) <= self.SEVERITY_THRESHOLD
@@ -296,42 +296,30 @@ class Command(BaseCommand):
         ]
         return 'pylint', pylint
 
-    def handle(self, *args, **options):
-        """Execute the lint runner using the provided command line args."""
-        commands = self.construct_commands(options)
-        summary = {}
-        for app in sorted(options['apps']):
-            ok = True
-            issues = []
+    @staticmethod
+    def print_output(results):
+        """
+        Output the lint runner results to the terminal.
 
-            for linter, command in commands:
-                command[-1] = app
-                try:
-                    subprocess.check_output(command, stderr=subprocess.STDOUT)
-                except subprocess.CalledProcessError as e:
-                    regex = getattr(LintIssue, f'regex_{linter}'.upper())
-                    handler = getattr(LintIssue, f'from_{linter}')
-
-                    for line in regex.finditer(force_text(e.output)):
-                        issue = handler(line)
-                        if issue and not issue.ok:
-                            ok = False
-                            issues.append(issue)
-
-            summary[app] = {
-                'ok': ok,
-                'issues': issues
+        :param results: lint runner results
+        :type results: dict
+        Example results:
+            {
+                app: {
+                    'passed': False,
+                    'issues': ['pylint [R0914]', ... ]
+                }
             }
-
+        """
         title = '          Results          '
         max_padding = len(title) - 6
         Terminal.info(title)
         Terminal.info('-' * len(title))
 
-        for app, data in summary.items():
+        for app, data in results.items():
             padding = ' ' * (max_padding - len(app))
 
-            if data['ok']:
+            if data['passed']:
                 Terminal.success(
                     app + padding + 'PASSED',
                     style=Terminal.Style.BOLD
@@ -343,3 +331,32 @@ class Command(BaseCommand):
                 )
                 for issue in data['issues']:
                     Terminal.error(' - ' + str(issue))
+
+    def handle(self, *args, **options):
+        """Execute the lint runner using the provided command line args."""
+        commands = self.construct_commands(options)
+        summary = {}
+        for app in sorted(options['apps']):
+            passed = True
+            issues = []
+
+            for linter, command in commands:
+                command[-1] = app
+                try:
+                    subprocess.check_output(command, stderr=subprocess.STDOUT)
+                except subprocess.CalledProcessError as exc:
+                    regex = getattr(LintIssue, f'regex_{linter}'.upper())
+                    handler = getattr(LintIssue, f'from_{linter}')
+
+                    for line in regex.finditer(force_text(exc.output)):
+                        issue = handler(line)
+                        if issue and not issue.acceptable:
+                            passed = False
+                            issues.append(issue)
+
+            summary[app] = {
+                'passed': passed,
+                'issues': issues
+            }
+
+        self.print_output(summary)

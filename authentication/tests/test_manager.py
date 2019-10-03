@@ -33,8 +33,9 @@ class TestUserManager(TestCase):
 
     def test__create_user_1(self):
         """ Test no email given raises ValueError """
+        method = getattr(User.objects, '_create_user')
         with self.assertRaisesMessage(ValueError, 'Email must be set'):
-            User.objects._create_user(
+            method(
                 email='',
                 password='',
                 is_superuser=False
@@ -42,7 +43,8 @@ class TestUserManager(TestCase):
 
     def test__create_user_2(self):
         """ Test create normal User no extra data """
-        user = User.objects._create_user(
+        method = getattr(User.objects, '_create_user')
+        user = method(
             email=self.email,
             password=self.password,
             is_superuser=False
@@ -57,7 +59,8 @@ class TestUserManager(TestCase):
 
     def test__create_user_3(self):
         """ Test create superuser no extra data """
-        user = User.objects._create_user(
+        method = getattr(User.objects, '_create_user')
+        user = method(
             email=self.email,
             password=self.password,
             is_superuser=True
@@ -72,7 +75,8 @@ class TestUserManager(TestCase):
 
     def test__create_user_4(self):
         """ Test create user with extra data """
-        user = User.objects._create_user(
+        method = getattr(User.objects, '_create_user')
+        user = method(
             email=self.email,
             password=self.password,
             is_superuser=False,

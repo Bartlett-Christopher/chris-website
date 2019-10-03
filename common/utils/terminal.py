@@ -8,12 +8,12 @@
 from sys import stdout
 
 
-class Terminal(object):
+class Terminal:
     """Container for common terminal features."""
 
     RESET = 0
 
-    class Colour(object):
+    class Colour:
         """Terminal colours."""
 
         DEFAULT = 0
@@ -26,7 +26,7 @@ class Terminal(object):
         CYAN = 36
         WHITE = 37
 
-    class Style(object):
+    class Style:
         """Terminal styles."""
 
         NONE = 0
@@ -35,7 +35,7 @@ class Terminal(object):
         NEGATIVE1 = 3
         NEGATIVE2 = 5
 
-    class Background(object):
+    class Background:
         """Terminal background colours."""
 
         BLACK = 40
