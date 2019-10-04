@@ -1,14 +1,13 @@
 # -*- coding: utf-8 -*-
 """
-.. module: authentication.tests.test_manager
-  :synopsis: Unit tests for User Manager
+:synopsis: tests for User manager.
 
-.. moduleauthor:: Chris Bartlett <bartlett.christopher.p@gmail.com>
+.. module: authentication.tests.test_manager
+.. author: Chris Bartlett <bartlett.christopher.p@gmail.com>
 """
 from django.test import TestCase
 from django_dynamic_fixture import G
 
-from authentication.manager import UserManager
 from authentication.models import User
 
 
@@ -34,12 +33,18 @@ class TestUserManager(TestCase):
 
     def test__create_user_1(self):
         """ Test no email given raises ValueError """
+        method = getattr(User.objects, '_create_user')
         with self.assertRaisesMessage(ValueError, 'Email must be set'):
-            User.objects._create_user(email='', password='', is_superuser=False)
+            method(
+                email='',
+                password='',
+                is_superuser=False
+            )
 
     def test__create_user_2(self):
         """ Test create normal User no extra data """
-        user = User.objects._create_user(
+        method = getattr(User.objects, '_create_user')
+        user = method(
             email=self.email,
             password=self.password,
             is_superuser=False
@@ -54,7 +59,8 @@ class TestUserManager(TestCase):
 
     def test__create_user_3(self):
         """ Test create superuser no extra data """
-        user = User.objects._create_user(
+        method = getattr(User.objects, '_create_user')
+        user = method(
             email=self.email,
             password=self.password,
             is_superuser=True
@@ -69,7 +75,8 @@ class TestUserManager(TestCase):
 
     def test__create_user_4(self):
         """ Test create user with extra data """
-        user = User.objects._create_user(
+        method = getattr(User.objects, '_create_user')
+        user = method(
             email=self.email,
             password=self.password,
             is_superuser=False,

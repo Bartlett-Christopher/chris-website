@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 """
-.. module: authentication.admin.user
-   :synopsis: Custom User Admin for the authentication app
+:synopsis: custom User admin for the authentication app.
 
-.. moduleauthor:: Chris Bartlett <bartlett.christopher.p@gmail.com>
+.. module: authentication.admin.user
+.. author: Chris Bartlett <bartlett.christopher.p@gmail.com>
 """
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as UserAdmin_
@@ -14,7 +14,7 @@ from authentication.models import User
 
 @admin.register(User)
 class UserAdmin(UserAdmin_, admin.ModelAdmin):
-    """ Custom Admin class for the User model """
+    """Custom Admin class for the User model."""
 
     list_display = (
         'id',

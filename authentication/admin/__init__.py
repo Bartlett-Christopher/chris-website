@@ -1,8 +1,12 @@
 # -*- coding: utf-8 -*-
 """
-.. module: authentication.models.__init__
-   :synopsis: Admin for the authentication app
+:synopsis: admin for the authentication app.
 
-.. moduleauthor:: Chris Bartlett <bartlett.christopher.p@gmail.com>
+.. module: authentication.admin
+.. author: Chris Bartlett <bartlett.christopher.p@gmail.com>
 """
-from .user import UserAdmin
+from authentication.admin.user import UserAdmin
+
+__all__ = [
+    'UserAdmin'
+]
