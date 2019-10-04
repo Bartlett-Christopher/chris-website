@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 """
-.. module: authentication.tests.admin.test_user
-  :synopsis: Unit testing of User Admin
+:synopsis: tests for User admin.
 
-.. moduleauthor:: Chris Bartlett <bartlett.christopher.p@gmail.com>
+.. module: authentication.tests.admin.test_user
+.. author: Chris Bartlett <bartlett.christopher.p@gmail.com>
 """
 from django.contrib.admin import AdminSite
 from django.test import TestCase

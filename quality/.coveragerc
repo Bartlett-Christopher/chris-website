@@ -1,0 +1,18 @@
+# coverage configuration file
+[run]
+branch = True
+omit =
+    */tests/*
+    */migrations/*
+    */urls.py
+    */wsgi.py
+    */settings/*
+    */management/*
+    */fixtures/*
+    */__init__.py
+
+[html]
+directory = quality/_coverage
+
+[report]
+precision = 2

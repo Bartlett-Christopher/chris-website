@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 """
-.. module: authentication.models.user
-   :synopsis: Custom User model for the authentication app
+:synopsis: custom User model for the authentication app.
 
-.. moduleauthor:: Chris Bartlett <bartlett.christopher.p@gmail.com>
+.. module: authentication.models.user
+.. author: Chris Bartlett <bartlett.christopher.p@gmail.com>
 """
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.db import models
@@ -16,6 +16,7 @@ from authentication.manager import UserManager
 class User(AbstractBaseUser, PermissionsMixin):
     """
     Custom User class.
+
     - Replaces django.contrib.auth.models.user
     - Provides all custom fields required for this site
     """
@@ -52,13 +53,14 @@ class User(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
 
     class Meta:
-        """ Metadata for the User model """
+        """Metadata for the User model."""
+
         app_label = 'authentication'
         verbose_name = _('User')
         verbose_name_plural = _('Users')
 
-    def __unicode__(self):
-        """ unicode repr """
+    def __str__(self):
+        """Display object as string."""
         return '{name} ({email})'.format(
             name=self.name,
             email=self.email
@@ -67,7 +69,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     @property
     def name(self):
         """
-        User name property
+        User name property.
+
         :return: human readable name
         :rtype: six.text_type
         """
@@ -85,7 +88,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     @property
     def is_staff(self):
         """
-        User property - is_staff and is_superuser are equivalent
+        User property - is_staff and is_superuser are equivalent.
+
         :return: whether User is staff member
         :rtype: bool
         """

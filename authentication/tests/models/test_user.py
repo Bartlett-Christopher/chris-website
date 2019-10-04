@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 """
-.. module: authentication.tests.models.user
-   :synopsis: Unit testing of User model
+:synopsis: tests for User model.
 
-.. moduleauthor:: Chris Bartlett <bartlett.christopher.p@gmail.com>
+.. module: authentication.tests.models.user
+.. author: Chris Bartlett <bartlett.christopher.p@gmail.com>
 """
 from django.test import TestCase
 
@@ -13,7 +13,7 @@ from authentication.models import User
 class TestUser(TestCase):
     """ Unit testing of authentication.User """
 
-    def test_unicode_repr(self):
+    def test_str(self):
         """ Test str representation of User """
         user = User(
             title='Dr',
@@ -22,7 +22,7 @@ class TestUser(TestCase):
             email='bartlett.christopher.p@gmail.com',
         )
         self.assertEqual(
-            user.__unicode__(),
+            user.__str__(),
             'Dr Chris Bartlett (bartlett.christopher.p@gmail.com)'
         )
 

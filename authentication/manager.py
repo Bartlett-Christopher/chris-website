@@ -1,29 +1,34 @@
 # -*- coding: utf-8 -*-
 """
-.. module: authentication.models.user
-   :synopsis: Custom User model for the authentication app
+:synopsis: custom User model for the authentication app.
 
-.. moduleauthor:: Chris Bartlett <bartlett.christopher.p@gmail.com>
+.. module: authentication.models.user
+.. author: Chris Bartlett <bartlett.christopher.p@gmail.com>
 """
 from django.contrib.auth.models import BaseUserManager
 from django.utils import timezone
 
 
 class UserManager(BaseUserManager):
-    """ Custom UserManager for User model """
+    """Custom UserManager for User model."""
 
     def get_by_email(self, email):
         """
+        Get User object by email.
 
-        :param email:
-        :return:
+        :param email: user email
+        :type email: str
+        :return: the User instance
+        :rtype: authentication.models.user.User
+        :raises: DoesNotExist
         """
         return self.get(email=email.lower())
 
     def _create_user(self, email, password, is_superuser,
                      **extra_fields):
         """
-        Utility function to create a User with the specified attributes
+        Create a User with the specified attributes.
+
         :param email: User email
         :type email: six.text_type
         :param password: User password
@@ -52,7 +57,8 @@ class UserManager(BaseUserManager):
 
     def create_user(self, email, password, **extra_fields):
         """
-        Create a normal User with the specified email and password
+        Create a normal User with the specified email and password.
+
         :param email: User email
         :type email: six.text_type
         :param password: User password
@@ -66,7 +72,8 @@ class UserManager(BaseUserManager):
 
     def create_superuser(self, email, password, **extra_fields):
         """
-        Create a super User with the specified email and password
+        Create a super User with the specified email and password.
+
         :param email: User email
         :type email: six.text_type
         :param password: User password
