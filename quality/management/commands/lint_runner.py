@@ -10,11 +10,11 @@ import re
 import subprocess
 import sys
 
-from django.apps import apps
 from django.conf import settings
 from django.core.management import BaseCommand
 from django.utils.encoding import force_text
 
+from common.utils.collect_apps import collect_project_apps
 from common.utils.terminal import Terminal
 
 
@@ -185,22 +185,7 @@ class Command(BaseCommand):
         """Initialise the lint runner."""
         super(Command, self).__init__(*args, **kwargs)
         self.result = None
-        self.apps = self.collect_project_apps()
-
-    @staticmethod
-    def collect_project_apps():
-        """
-        Gather all importable project apps into set.
-
-        :return: set of importable project apps
-        :rtype: set
-        """
-        all_apps = set()
-        for app in apps.get_app_configs():
-            if app.path.startswith(settings.PROJECT_DIR):
-                all_apps.add(app.name)
-
-        return all_apps
+        self.apps = collect_project_apps()
 
     def add_arguments(self, parser):
         """
