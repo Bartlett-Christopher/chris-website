@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
-.. module:: staticpages.views
-   :synopsis: Views for the staticpages app
+  :synopsis: Views for the staticpages app.
 
-.. moduleauthor:: Chris Bartlett <chris.bartlett@therealbuzzgroup.com>
+.. module: staticpages.views
+.. author: Chris Bartlett <chris.bartlett@therealbuzzgroup.com>
 """

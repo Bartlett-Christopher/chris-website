@@ -1,13 +1,12 @@
 # -*- coding: utf-8 -*-
 """
-.. module:: staticpages.views.page
-   :synopsis: view to return a static page
+  :synopsis: view to return a static page.
 
-.. moduleauthor:: Chris Bartlett <chris.bartlett@therealbuzzgroup.com>
+.. module: staticpages.views.page
+.. author: Chris Bartlett <chris.bartlett@therealbuzzgroup.com>
 """
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse
 from django.template import loader
-from django.urls import reverse
 from django.views.generic import View
 
 from staticpages.exceptions import PageNotFound
@@ -15,16 +14,19 @@ from staticpages.models.page import Page
 
 
 class PageView(View):
-    """ View class for static pages """
+    """View class for static pages."""
 
     def __init__(self, *args, **kwargs):
+        """Initialise the page view."""
         self.page = None
         super().__init__(*args, **kwargs)
 
     def dispatch(self, request, *args, **kwargs):
         """
-        Dispatch override to get the static page object and call through to
-        the appropriate http method
+        Dispatch override to get the static page.
+
+        Get the static page object and call through to the appropriate
+        http method.
 
         :param request: the current request
         :type request: django.http.HttpRequest
@@ -48,7 +50,7 @@ class PageView(View):
 
     def get_context(self):
         """
-        Build the static page template context
+        Build the static page template context.
 
         :return: the static page context
         :rtype: dict
@@ -59,7 +61,7 @@ class PageView(View):
 
     def get(self, request, *args, **kwargs):
         """
-        Handler for getting a static page
+        Get request handler for a static page.
 
         :param request: the current request
         :type request: django.http.HttpRequest

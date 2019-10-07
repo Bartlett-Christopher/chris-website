@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
-.. module:: commons.tests.mixins
-   :synopsis: unit tests for mixins module of common app
+  :synopsis: unit tests for mixins module of common app.
 
-.. moduleauthor:: Chris Bartlett <chris.bartlett@therealbuzzgroup.com>
+.. module:: commons.tests.mixins
+.. author:: Chris Bartlett <chris.bartlett@therealbuzzgroup.com>
 """

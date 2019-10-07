@@ -1,8 +1,12 @@
 # -*- coding: utf-8 -*-
 """
-.. module:: staticpages.admin
-   :synopsis: Admin module for staticpages app
+  :synopsis: Admin module for staticpages app.
 
-.. moduleauthor:: Chris Bartlett <chris.bartlett@therealbuzzgroup.com>
+.. module: staticpages.admin
+.. author: Chris Bartlett <chris.bartlett@therealbuzzgroup.com>
 """
 from staticpages.admin.page import PageAdmin
+
+__all__ = [
+    'PageAdmin'
+]

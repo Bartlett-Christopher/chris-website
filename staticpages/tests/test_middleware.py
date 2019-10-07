@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """
-.. module:: staticpages.tests.test_middleware
-   :synopsis: unit tests for staticpages middleware
+  :synopsis: unit tests for staticpages middleware.
 
+.. module:: staticpages.tests.test_middleware
 .. moduleauthor:: Chris Bartlett <chris.bartlett@therealbuzzgroup.com>
 """
 from unittest.mock import create_autospec, patch
@@ -20,7 +20,7 @@ from staticpages.views.page import PageView
 
 
 class TestStaticPageCaptureMiddleware(TestCase):
-    """ Test class for StaticPageCaptureMiddleware """
+    """Test class for StaticPageCaptureMiddleware."""
 
     @classmethod
     def setUpClass(cls):
@@ -35,6 +35,7 @@ class TestStaticPageCaptureMiddleware(TestCase):
         )
 
     def test_process_response__response_200(self):
+        """Test 200 response falls through."""
         processed_response = self.middleware.process_response(
             self.request, self.standard_response
         )
@@ -43,6 +44,7 @@ class TestStaticPageCaptureMiddleware(TestCase):
 
     @patch('staticpages.middleware.PageView')
     def test_process_response__response_404_no_static_page(self, mock_view):
+        """Test 404 response raised is no static page."""
         view = create_autospec(PageView)
         view.dispatch.side_effect = PageNotFound
         mock_view.return_value = view
@@ -60,6 +62,7 @@ class TestStaticPageCaptureMiddleware(TestCase):
 
     @patch('staticpages.middleware.PageView')
     def test_process_response__response_404_static_page_found(self, mock_view):
+        """Test static page found and returned after 404."""
         view = create_autospec(PageView)
         view.dispatch.return_value = self.static_page_response
         mock_view.return_value = view
@@ -77,7 +80,7 @@ class TestStaticPageCaptureMiddleware(TestCase):
 
 
 class TestIntegrationStaticPageCaptureMiddleware(WebTest):
-    """ Webtest class for StaticPageCaptureMiddleware """
+    """Webtest class for StaticPageCaptureMiddleware."""
 
     @classmethod
     def setUpClass(cls):
@@ -90,6 +93,7 @@ class TestIntegrationStaticPageCaptureMiddleware(WebTest):
         )
 
     def test_response_200(self):
+        """Test 200 response falls through."""
         home = reverse('landing')
 
         response = self.app.get(home)
@@ -97,6 +101,7 @@ class TestIntegrationStaticPageCaptureMiddleware(WebTest):
         self.assertEqual(response.status_code, 200)
 
     def test_response_404_no_static_page(self):
+        """Test 404 response raised when no static page."""
         url = '/definitely-does-not-exist/'
 
         response = self.app.get(url, status=404)
@@ -108,6 +113,7 @@ class TestIntegrationStaticPageCaptureMiddleware(WebTest):
         )
 
     def test_response_404_static_page_found_disabled(self):
+        """Test 404 response when static page is disabled."""
         static_page = G(
             Page,
             url='static-page',
@@ -125,6 +131,7 @@ class TestIntegrationStaticPageCaptureMiddleware(WebTest):
         )
 
     def test_response_404_static_page_found_enabled(self):
+        """Test static page returned when enabled."""
         static_page = G(
             Page,
             url='static-page',

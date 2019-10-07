@@ -1,8 +1,12 @@
 # -*- coding: utf-8 -*-
 """
-.. module:: staticpages.models
-   :synopsis: Models for staticpages app
+  :synopsis: Models for staticpages app.
 
-.. moduleauthor:: Chris Bartlett <chris.bartlett@therealbuzzgroup.com>
+.. module: staticpages.models
+.. author: Chris Bartlett <chris.bartlett@therealbuzzgroup.com>
 """
 from staticpages.models.page import Page
+
+__all__ = [
+    'Page'
+]

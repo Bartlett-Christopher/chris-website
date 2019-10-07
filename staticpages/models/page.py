@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 """
-.. module:: staticpages.models.page
-   :synopsis: Model to describe a static web page
+  :synopsis: Model to describe a static web page.
 
-.. moduleauthor:: Chris Bartlett <chris.bartlett@therealbuzzgroup.com>
+.. module: staticpages.models.page
+.. author: Chris Bartlett <chris.bartlett@therealbuzzgroup.com>
 """
 from ckeditor import fields
 
@@ -17,7 +17,8 @@ from staticpages.exceptions import PageNotFound
 
 
 class Page(TimeStampMixin, EnabledMixin, models.Model):
-    """ Model to describe a static web page """
+    """Model to describe a static web page."""
+
     url = models.CharField(
         verbose_name=_('URL'),
         max_length=255,
@@ -51,7 +52,8 @@ class Page(TimeStampMixin, EnabledMixin, models.Model):
     )
 
     class Meta:
-        """ Metadata for StaticPage model """
+        """Metadata for StaticPage model."""
+
         app_label = 'staticpages'
         verbose_name = _('Page')
         verbose_name_plural = _('Pages')
@@ -59,7 +61,7 @@ class Page(TimeStampMixin, EnabledMixin, models.Model):
     @classmethod
     def get_page(cls, url):
         """
-        Get the Page object provided a url
+        Get the Page object provided a url.
 
         :param url: static page url
         :type url: str
@@ -78,7 +80,7 @@ class Page(TimeStampMixin, EnabledMixin, models.Model):
     @staticmethod
     def process_url(url):
         """
-        Process the static page URL ensuring it starts and ends with '/'
+        Process the static page URL ensuring it starts and ends with '/'.
 
         :param url: the provided static page URL
         :type url: str
@@ -93,11 +95,11 @@ class Page(TimeStampMixin, EnabledMixin, models.Model):
         return url
 
 
-
 @receiver(pre_save, sender=Page)
-def pre_save_static_page(sender, instance, **kwargs):
+def pre_save_static_page(sender, instance, **kwargs):  # pylint: disable=W0613
     """
-    Pre-save signal handler for Page model
+    Pre-save signal handler for Page model.
+
     - append '/' to start and end of URLs (if necessary) for Django
     - set the default template name if none given
 
@@ -105,11 +107,9 @@ def pre_save_static_page(sender, instance, **kwargs):
     :type sender: staticpages.models.page.Page
     :param instance: model instance being saved
     :type sender: staticpages.models.page.Page
-    :param kwargs: not used
     """
     instance.url = sender.process_url(instance.url)
 
     if instance.template_name is None:
         # we are not specifying a template override, set default
         instance.template_name = 'staticpages/page.html'
-

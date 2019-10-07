@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
-.. module:: commons.tests
-   :synopsis: unit test module for common app
+  :synopsis: unit test module for common app.
 
+.. module:: commons.tests
 .. moduleauthor:: Chris Bartlett <chris.bartlett@therealbuzzgroup.com>
 """

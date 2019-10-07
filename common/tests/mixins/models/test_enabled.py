@@ -16,11 +16,13 @@ class TestEnabledMixin(TestCase):
     """ Unit test class for EnabledMixin """
 
     def test_construction__default(self):
+        """Test enabled model mixin construction."""
         mixin = EnabledMixin()
 
         self.assertTrue(mixin.enabled)
 
     def test_enable__no_commit(self):
+        """Test enable method without commit."""
         mixin = EnabledMixin(enabled=False)
 
         with patch.object(mixin, 'save') as mock_save:
@@ -30,6 +32,7 @@ class TestEnabledMixin(TestCase):
         mock_save.assert_not_called()
 
     def test_enable__with_commit(self):
+        """Test enable method with commit."""
         mixin = EnabledMixin(enabled=False)
 
         with patch.object(mixin, 'save') as mock_save:
@@ -41,6 +44,7 @@ class TestEnabledMixin(TestCase):
         )
 
     def test_disable__no_commit(self):
+        """Test disable method without commit."""
         mixin = EnabledMixin(enabled=True)
 
         with patch.object(mixin, 'save') as mock_save:
@@ -50,6 +54,7 @@ class TestEnabledMixin(TestCase):
         mock_save.assert_not_called()
 
     def test_disable__with_commit(self):
+        """Test disable method with commit."""
         mixin = EnabledMixin(enabled=True)
 
         with patch.object(mixin, 'save') as mock_save:

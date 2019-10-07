@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
-.. module:: commons.mixins.models
-   :synopsis: module for common model mixins
+   :synopsis: module for common model mixins.
 
-.. moduleauthor:: Chris Bartlett <chris.bartlett@therealbuzzgroup.com>
+.. module:: commons.mixins.models
+.. eauthor:: Chris Bartlett <chris.bartlett@therealbuzzgroup.com>
 """

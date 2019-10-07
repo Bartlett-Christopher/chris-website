@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 """
+  :synopsis: urls for the home app.
+
 .. module: home.urls
-  :synopsis: urls for the home app
-.. module author: Chris Bartlett <bartlett.christopher.p@gmail.com>
+.. author: Chris Bartlett <bartlett.christopher.p@gmail.com>
 """
 from django.urls import path
 

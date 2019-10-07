@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """
+:synopsis: home app.
+
 .. module: home
-  :synopsis: home app
 .. module author: Chris Bartlett <bartlett.christopher.p@gmail.com>
 """

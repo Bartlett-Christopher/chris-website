@@ -1,26 +1,30 @@
 # -*- coding: utf-8 -*-
 """
-.. module:: staticpages.middleware
-   :synopsis: middleware to capture a 404 response and return a static page
+  :synopsis: middleware to capture a 404 response and return a static page.
 
-.. moduleauthor:: Chris Bartlett <chris.bartlett@therealbuzzgroup.com>
+.. module: staticpages.middleware
+.. author: Chris Bartlett <chris.bartlett@therealbuzzgroup.com>
 """
 from common.mixins.middleware import MiddlewareMixin
 from staticpages.exceptions import BasePageException
 from staticpages.views.page import PageView
 
 
-class StaticPageCaptureMiddleware(MiddlewareMixin, object):
+class StaticPageCaptureMiddleware(MiddlewareMixin):
     """
-    Middleware to intercept a 404 response thrown by Django url resolving and
-    return a static page if one found with appropriate url.
-    Otherwise, fall through and continue to raise 404.
+    Middleware to intercept a 404 response thrown by Django url resolving.
+
+    Return a static page if one found with appropriate url, otherwise fall
+    through and continue to raise 404.
     """
 
-    def process_response(self, request, response):
+    @staticmethod
+    def process_response(request, response):
         """
+        Process the response.
+
         If the response is a 404, check for a static page and return it,
-        otherwise fall through
+        otherwise fall through.
 
         :param request: the current request
         :type request: django.http.HttpRequest

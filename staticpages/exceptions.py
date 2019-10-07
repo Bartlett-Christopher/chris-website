@@ -1,17 +1,15 @@
 # -*- coding: utf-8 -*-
 """
-.. module:: staticpages.exceptions
-   :synopsis: exception for the staticpages app
+  :synopsis: exceptions for the staticpages app.
 
-.. moduleauthor:: Chris Bartlett <chris.bartlett@therealbuzzgroup.com>
+.. module: staticpages.exceptions
+.. author: Chris Bartlett <chris.bartlett@therealbuzzgroup.com>
 """
 
 
 class BasePageException(Exception):
-    """ Base exception for all Page exceptions """
-    pass
+    """Base exception for all Page exceptions."""
 
 
 class PageNotFound(BasePageException):
-    """ Exception raised when no Page found """
-    pass
+    """Exception raised when no Page found."""

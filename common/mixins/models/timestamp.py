@@ -1,18 +1,17 @@
 # -*- coding: utf-8 -*-
 """
-.. module:: common.mixins.models.timestamp
-   :synopsis: mixin to add time stamping fields to object
+  :synopsis: mixin to add time stamping fields to object.
 
-.. moduleauthor:: Chris Bartlett <chris.bartlett@therealbuzzgroup.com>
+.. module:: common.mixins.models.timestamp
+.. author:: Chris Bartlett <chris.bartlett@therealbuzzgroup.com>
 """
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 
 class TimeStampMixin(models.Model):
-    """
-    Mixin to add created and modified timestamps
-    """
+    """Mixin to add created and modified timestamps."""
+
     created = models.DateTimeField(
         verbose_name=_('Date object created'),
         editable=False,
@@ -26,5 +25,6 @@ class TimeStampMixin(models.Model):
     )
 
     class Meta:
-        """ Metadata for TimeStampMixin """
+        """Metadata for TimeStampMixin."""
+
         abstract = True

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
-.. module:: staticpages.tests
-   :synopsis: Unit tests for the staticpages app
+  :synopsis: Unit tests for the staticpages app.
 
-.. moduleauthor:: Chris Bartlett <chris.bartlett@therealbuzzgroup.com>
+.. module: staticpages.tests
+.. author: Chris Bartlett <chris.bartlett@therealbuzzgroup.com>
 """
