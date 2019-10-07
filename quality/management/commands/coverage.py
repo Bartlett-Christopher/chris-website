@@ -23,20 +23,6 @@ class Command(BaseCommand):
 
     PYTHON_PATH = os.path.dirname(sys.executable)
 
-    OMIT = [
-        '*/tests/*',
-        '*/migrations/*',
-        '*/urls.py',
-        '*/urls.py',
-        '*/urls/*',
-        '*/wsgi.py',
-        '*/settings/*',
-        '*/management/*',
-        '*/fixtures/*',
-        '*/imageuploader/utils/backend/exif.py*',
-        '*.venv/*'
-    ]
-
     help = 'Coverage runner - check unit test coverage.'
 
     def __init__(self, *args, **kwargs):
