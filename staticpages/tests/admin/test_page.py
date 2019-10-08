@@ -32,7 +32,7 @@ class TestPageAdmin(TestCase):
         self.assertIsInstance(link, SafeString)
         self.assertEqual(
             link,
-            '''<a href="static-page-1" target="_blank">View on site</a>'''
+            "<a href='static-page-1' target='_blank'>View on site</a>"
         )
         mock.assert_called_once_with(obj)
 

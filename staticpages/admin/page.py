@@ -65,10 +65,10 @@ class PageAdmin(admin.ModelAdmin):
         :return: link to view the static page
         :rtype: django.utils.safestring.SafeText
         """
-        link = '''<a href="{url}" target="_blank">{text}</a>'''.format(
-            url=self.get_view_on_site_url(obj),
-            text='View on site'
-        )
+
+        link = f"<a href='{self.get_view_on_site_url(obj)}' target='_blank'>" \
+               f"View on site</a>"
+
         return mark_safe(link)
 
     def get_view_on_site_url(self, obj=None):
