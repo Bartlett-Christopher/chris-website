@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}
+    {% trans 'Bad request' %}
+{% endblock %}
+
+{% block content %}
+    <h1>{% trans 'Bad request' %}</h1>
+    <h2>400</h2>
+{% endblock content %}

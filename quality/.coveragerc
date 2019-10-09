@@ -10,6 +10,7 @@ omit =
     */management/*
     */fixtures/*
     */__init__.py
+    */apps.py
 
 [html]
 directory = quality/_coverage
