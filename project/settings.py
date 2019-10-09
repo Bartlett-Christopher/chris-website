@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # third party
     'ckeditor',
 
     # project apps
@@ -150,3 +151,6 @@ PASSWORD_HASHERS = [
     'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
     'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
 ]
+
+# * - EMAIL - *
+DEFAULT_FROM_EMAIL = 'bartlett.christopher.p@gmail.com'

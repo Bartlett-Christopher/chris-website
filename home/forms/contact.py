@@ -5,16 +5,41 @@
 .. module: home.forms.contact
 .. author: Chris Bartlett <bartlett.christopher.p@gmail.com>
 """
-from django.forms import forms
+from django import forms
 
 
 class ContactUsForm(forms.Form):
     """Contact us form."""
 
-    def send_mail(self):
-        """
-        Send emails.
+    recipient_list = ['christopherbartlett@hotmail.co.uk']
 
-        - to user with confirmation of request
-        - to self with details of contact
-        """
+    name = forms.CharField(
+        max_length=255,
+        required=True,
+        widget=forms.TextInput(
+            attrs={
+                'placeholder': 'Your name'
+            }
+        )
+    )
+    email_address = forms.EmailField(
+        max_length=255,
+        required=True,
+        widget=forms.EmailInput(
+            attrs={
+                'placeholder': 'Your email'
+            }
+        )
+    )
+
+    message = forms.CharField(
+        required=True,
+        widget=forms.Textarea(
+            attrs={
+                'placeholder': 'Your message'
+            }
+        ),
+    )
+
+    def send_email(self):
+        print('Sending email')
