@@ -42,3 +42,10 @@ class Enquiry(TimeStampMixin):
         null=False,
         help_text=_('Indicates if this enquiry has been resolved.')
     )
+
+    notes = models.TextField(
+        verbose_name=_('Administration notes'),
+        blank=True,
+        null=True,
+        help_text=_('Notes for administrators.')
+    )

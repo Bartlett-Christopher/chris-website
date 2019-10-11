@@ -21,6 +21,7 @@ class Migration(migrations.Migration):
                 ('email', models.EmailField(help_text='The email address supplied by the enquiring user.', max_length=254, verbose_name='Email address')),
                 ('message', models.TextField(help_text='The user enquiry.', verbose_name='Message')),
                 ('resolved', models.BooleanField(default=False, help_text='Indicates if this enquiry has been resolved.', verbose_name='Enquiry resolved?')),
+                ('notes', models.TextField(blank=True, help_text='Notes for administrators.', null=True, verbose_name='Administration notes')),
             ],
             options={
                 'abstract': False,
