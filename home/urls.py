@@ -7,10 +7,10 @@
 """
 from django.urls import path
 
-from home.views import ContactUsView, LandingView
+from home.views import EnquiryView, LandingView
 
 
 urlpatterns = [
     path('', LandingView.as_view(), name='landing'),
-    path('contact-us', ContactUsView.as_view(), name='contact_us'),
+    path('contact-us', EnquiryView.as_view(), name='enquiry'),
 ]

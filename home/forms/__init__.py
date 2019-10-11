@@ -4,10 +4,10 @@
 ::module: home.forms
 ::author: Chris Bartlett <bartlett.christopher.p@gmail.com>
 """
-from home.forms.contact import ContactUsForm
+from home.forms.enquiry import EnquiryForm
 
 
 __all__ = [
-    'ContactUsForm'
+    'EnquiryForm'
 ]
 

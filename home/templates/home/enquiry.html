@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Contact us</h1>
+
+    {% if not request_received %}
+        <form action="{% url 'home:enquiry' %}" method="post">
+            {% csrf_token %}
+
+            {% for field in form %}
+                <div class="form-row form-label">
+                    {{ field.label_tag}}
+                </div>
+                <div class="form-row form-input">
+                    {{ field }}
+                </div>
+            {% endfor %}
+
+            <input type="submit" value="Send">
+        </form>
+    {% endif %}
+
+    {% if request_received %}
+        <p>
+            {{ enquiry.name }}, thank you for your message.
+            Your enquiry reference is <strong>{{ enquiry.id }}</strong>
+        </p>
+    {% endif %}
+
+{% endblock content %}
