@@ -56,3 +56,20 @@ class EnquiryAdmin(admin.ModelAdmin):
         'name',
         'email'
     )
+
+    actions = ['resolve_enquiries']
+
+    def resolve_enquiries(self, request, queryset):
+        """
+        Enquiry admin action to resolve multiple enquiries.
+
+        :param request: the current request
+        :type request: django.http.HttpResponse
+        :param queryset: the enquiry queryset
+        :type queryset: django.db.models.query.QuerySet
+        """
+        queryset.update(resolved=True)
+        resolved = queryset.count()
+        message = f"Successfully resolved {resolved} " \
+                  f"{'enquiry' if resolved == 1 else 'enquiries'}."
+        self.message_user(request, message)
