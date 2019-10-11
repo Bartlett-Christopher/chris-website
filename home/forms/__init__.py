@@ -10,4 +10,3 @@ from home.forms.enquiry import EnquiryForm
 __all__ = [
     'EnquiryForm'
 ]
-

@@ -17,6 +17,14 @@ class EnquiryView(FormView):
     template_name = 'home/enquiry.html'
 
     def form_valid(self, form):
+        """
+        Save the form and re-render the contact-us page with the result.
+
+        :param form: the enquiry form
+        :type form: home.forms.enquiry.EnquiryForm
+        :return: the successful enquiry response
+        :rtype: django.http.HttpResponse
+        """
         instance = form.save(commit=True)
         extra_context = {
             'enquiry': instance,
