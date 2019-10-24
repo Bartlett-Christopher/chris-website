@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # third party
+    'background_task',
     'ckeditor',
 
     # project apps
@@ -155,5 +156,11 @@ PASSWORD_HASHERS = [
     'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
 ]
 
-# * - EMAIL - *
+# * --- EMAIL --- *
 DEFAULT_FROM_EMAIL = 'bartlett.christopher.p@gmail.com'
+EMAIL_RECIPIENT = 'bartlett.christopher.p@gmail.com'
+
+# * - BACKGROUND TASK - *
+BACKGROUND_TASK_RUN_ASYNC = True
+EMAIL_DELAY = 60  # 1 min
+EMAIL_DEBUG = True

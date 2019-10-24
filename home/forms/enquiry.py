@@ -6,7 +6,9 @@
 .. author: Chris Bartlett <bartlett.christopher.p@gmail.com>
 """
 from django import forms
+from django.conf import settings
 
+from common.utils.email import send_email
 from home.models import Enquiry
 
 
@@ -34,6 +36,10 @@ class EnquiryForm(forms.ModelForm):
         :return: the enquiry instance
         :rtype: home.models.enquiry.Enquiry
         """
-        print('email notification sent')
+        send_email(
+            to=[settings.EMAIL_RECIPIENT],
+            subject='Enquiry submitted.',
+            text=self.cleaned_data['message']
+        )
         instance = super(EnquiryForm, self).save(commit)
         return instance
