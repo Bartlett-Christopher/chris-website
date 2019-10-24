@@ -68,8 +68,7 @@ class EnquiryAdmin(admin.ModelAdmin):
         :param queryset: the enquiry queryset
         :type queryset: django.db.models.query.QuerySet
         """
-        queryset.update(resolved=True)
-        resolved = queryset.count()
+        resolved = queryset.filter(resolved=False).update(resolved=True)
         message = f"Successfully resolved {resolved} " \
                   f"{'enquiry' if resolved == 1 else 'enquiries'}."
         self.message_user(request, message)
