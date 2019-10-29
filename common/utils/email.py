@@ -12,17 +12,27 @@ from django.core.mail import send_mail as django_send_mail
 
 
 @background(schedule=settings.EMAIL_DELAY, queue='email')
-def send_email(to, subject, text,
+def send_email(recipient, subject, text,
                html=None, sender=settings.DEFAULT_FROM_EMAIL):
     """
-    Utility function to send an email.
+    Send an email.
 
+    :param recipient: recipients(s) email address
+    :type recipient: str or list
+    :param subject: email subject line
+    :type subject: str
+    :param text: email content
+    :type text: str
+    :param html: email HTML content or None
+    :type html: str
+    :param sender: sender email address
+    :type sender: str
     """
-    if not isinstance(to, (list, tuple)):
-        to = [to]
+    if not isinstance(recipient, (list, tuple)):
+        recipient = [recipient]
 
     if settings.EMAIL_DEBUG:
-        recipients = ','.join(to)
+        recipients = ','.join(recipient)
         print(
             f'sending email...\n'
             f'from: {sender}\n'
@@ -34,7 +44,7 @@ def send_email(to, subject, text,
             subject=subject,
             message=text,
             from_email=sender,
-            recipient_list=to,
+            recipient_list=recipient,
             fail_silently=False,
             html_message=html
         )

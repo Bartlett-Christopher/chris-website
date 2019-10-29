@@ -41,7 +41,7 @@ class EnquiryForm(forms.ModelForm):
 
         template = loader.get_template('home/email/enquiry.html')
         send_email(
-            to=[settings.EMAIL_RECIPIENT],
+            recipient=[settings.EMAIL_RECIPIENT],
             subject='Enquiry submitted.',
             text=f"Name: {self.cleaned_data['name']}\n"
                  f"Email: {self.cleaned_data['email']}\n"
