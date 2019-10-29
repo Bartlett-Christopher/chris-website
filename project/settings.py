@@ -160,7 +160,14 @@ PASSWORD_HASHERS = [
 DEFAULT_FROM_EMAIL = 'bartlett.christopher.p@gmail.com'
 EMAIL_RECIPIENT = 'bartlett.christopher.p@gmail.com'
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = DEFAULT_FROM_EMAIL
+EMAIL_HOST_PASSWORD = 'Teltrab1990'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+
 # * - BACKGROUND TASK - *
 BACKGROUND_TASK_RUN_ASYNC = True
 EMAIL_DELAY = 60  # 1 min
-EMAIL_DEBUG = True
+EMAIL_DEBUG = False
