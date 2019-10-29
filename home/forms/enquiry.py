@@ -7,6 +7,7 @@
 """
 from django import forms
 from django.conf import settings
+from django.template import loader
 
 from common.utils.email import send_email
 from home.models import Enquiry
@@ -36,10 +37,15 @@ class EnquiryForm(forms.ModelForm):
         :return: the enquiry instance
         :rtype: home.models.enquiry.Enquiry
         """
+        instance = super(EnquiryForm, self).save(commit)
+
+        template = loader.get_template('home/email/enquiry.html')
         send_email(
             to=[settings.EMAIL_RECIPIENT],
             subject='Enquiry submitted.',
-            text=self.cleaned_data['message']
+            text=f"Name: {self.cleaned_data['name']}\n"
+                 f"Email: {self.cleaned_data['email']}\n"
+                 f"Message: {self.cleaned_data['message']}\n",
+            html=template.render({'instance': instance})
         )
-        instance = super(EnquiryForm, self).save(commit)
         return instance
