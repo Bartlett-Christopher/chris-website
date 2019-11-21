@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     # third party
     'background_task',
     'ckeditor',
+    'django_crontab',
 
     # project apps
     'authentication',
@@ -171,3 +172,8 @@ EMAIL_PORT = 587
 BACKGROUND_TASK_RUN_ASYNC = True
 EMAIL_DELAY = 60  # 1 min
 EMAIL_DEBUG = False
+
+# * - CRON JOBS - *
+CRONJOBS = [
+    ('*/15 * * * *', 'common.cron.process_background_tasks')
+]
