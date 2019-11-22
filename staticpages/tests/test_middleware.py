@@ -94,7 +94,7 @@ class TestIntegrationStaticPageCaptureMiddleware(WebTest):
 
     def test_response_200(self):
         """Test 200 response falls through."""
-        home = reverse('landing')
+        home = reverse('home:landing')
 
         response = self.app.get(home)
 

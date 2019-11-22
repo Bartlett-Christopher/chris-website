@@ -10,14 +10,14 @@ from importlib import import_module
 from background_task.models import Task
 from background_task.tasks import tasks as task_manager
 
-TASKS = [
-    'common.utils.email.send_email'
-]
+TASKS = {
+    'email': 'common.utils.email'
+}
 
 
 def process_background_tasks():
     """Discover and run background tasks in the common app."""
-    for path in TASKS:
+    for path in TASKS.values():
         import_module(path)
 
         pending_tasks = Task.objects.filter(task_name=path)
