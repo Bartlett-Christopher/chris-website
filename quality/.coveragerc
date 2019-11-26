@@ -11,6 +11,7 @@ omit =
     */fixtures/*
     */__init__.py
     */apps.py
+    */tasks.py
 
 [html]
 directory = quality/_coverage
