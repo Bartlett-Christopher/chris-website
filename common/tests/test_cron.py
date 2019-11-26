@@ -27,7 +27,10 @@ class TestProcessBackgroundTasks(TestCase):
     @mock.patch('common.cron.task_manager')
     def test_process_background_tasks__pending_email_tasks(
             self, mock_task_manager):
-        task = G(Task, task_name=TASKS['email'], fill_nullable_fields=False)
+        task = G(
+            Task,
+            task_name='common.utils.email.send_email',
+            fill_nullable_fields=False)
 
         process_background_tasks()
 

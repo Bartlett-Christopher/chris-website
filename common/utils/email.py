@@ -17,8 +17,8 @@ def send_email(recipient, subject, text,
     """
     Send an email.
 
-    :param recipient: recipients(s) email address
-    :type recipient: str or list
+    :param recipient: recipient(s) email address
+    :type recipient: str or list[str]
     :param subject: email subject line
     :type subject: str
     :param text: email content
