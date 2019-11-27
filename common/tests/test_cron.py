@@ -11,7 +11,7 @@ from unittest import mock
 from django.test import TestCase
 from django_dynamic_fixture import G
 
-from common.cron import process_background_tasks, TASKS
+from common.cron import process_background_tasks
 
 
 class TestProcessBackgroundTasks(TestCase):
