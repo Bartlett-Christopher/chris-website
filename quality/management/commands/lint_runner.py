@@ -177,7 +177,7 @@ class Command(BaseCommand):
 
     ALL_LINTERS = ['flake8', 'pydocstyle', 'pylint']
 
-    PYLINT_IGNORE = ['migrations', 'urls']
+    PYLINT_IGNORE = ['migrations', 'tests', 'urls']
 
     help = 'Lint runner - a code quality checker.'
 

@@ -5,8 +5,10 @@
 .. module: home.views
 .. author:: Chris Bartlett <bartlett.christopher.p@gmail.com>
 """
+from .enquiry import EnquiryView
 from .landing import LandingView
 
 __all__ = [
+    'EnquiryView',
     'LandingView'
 ]

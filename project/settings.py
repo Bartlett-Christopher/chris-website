@@ -44,7 +44,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # third party
+    'background_task',
     'ckeditor',
+    'django_crontab',
 
     # project apps
     'authentication',
@@ -73,7 +76,6 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [os.path.join(PROJECT_DIR, 'templates')],
-        'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -81,6 +83,10 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            'loaders': [
+                'django.template.loaders.filesystem.Loader',
+                'django.template.loaders.app_directories.Loader'
+            ]
         },
     },
 ]
@@ -149,4 +155,25 @@ PASSWORD_HASHERS = [
     'django.contrib.auth.hashers.PBKDF2PasswordHasher',
     'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
     'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
+]
+
+# * --- EMAIL --- *
+DEFAULT_FROM_EMAIL = 'bartlett.christopher.p@gmail.com'
+EMAIL_RECIPIENT = 'bartlett.christopher.p@gmail.com'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = DEFAULT_FROM_EMAIL
+EMAIL_HOST_PASSWORD = 'Teltrab1990'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+
+# * - BACKGROUND TASK - *
+BACKGROUND_TASK_RUN_ASYNC = True
+EMAIL_DELAY = 60  # 1 min
+EMAIL_DEBUG = False
+
+# * - CRON JOBS - *
+CRONJOBS = [
+    ('*/15 * * * *', 'common.cron.process_background_tasks')
 ]

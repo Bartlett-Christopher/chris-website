@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
-  :synopsis: unit test module for common utilities.
+  :synopsis: Unit test module for home views.
 
-.. module: common.tests.utils
+.. module: home.tests.views
 .. author: Chris Bartlett <chris.bartlett@therealbuzzgroup.com>
 """

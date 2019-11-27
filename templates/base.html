@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <title>
-        {% block title %}
-            TITLE
+       {% block title %}
+            Negative to Positive
         {% endblock title %}
     </title>
 
@@ -14,6 +14,10 @@
     {% endblock styles %}
 </head>
 <body>
+    {% block navigation %}
+        {% include 'common/navigation.html' %}
+    {% endblock navigation %}
+
     {% block content %}
         <h1>CONTENT HERE</h1>
     {% endblock content %}
