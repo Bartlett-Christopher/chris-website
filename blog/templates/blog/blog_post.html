@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if blog_post %}
+        <h1>{{ blog_post.title }}</h1>
+        {{ blog_post.content|safe }}
+    {% endif %}
+{% endblock content %}
