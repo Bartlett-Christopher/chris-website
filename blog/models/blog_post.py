@@ -87,6 +87,17 @@ class BlogPost(EnabledMixin, TimeStampMixin, models.Model):
         verbose_name = _('Blog post')
         verbose_name_plural = _('Blog posts')
 
+    @property
+    def is_published(self):
+        """
+        Is this blog post published?
+
+        :return: whether this blog post is published
+        :rtype: bool
+        """
+        return self.status == self.Status.PUBLISHED and \
+            self.published is not None
+
     def publish(self, user, commit=True):
         """
         Publish this blog post.

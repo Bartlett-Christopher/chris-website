@@ -25,7 +25,8 @@ class BlogPostListView(TemplateView):
         :rtype: django.http.HttpResponse
         """
         blogs = BlogPost.objects.filter(
-            status=BlogPost.Status.PUBLISHED
+            status=BlogPost.Status.PUBLISHED,
+            published__isnull=False
         ).order_by('-published')
 
         return self.render_to_response(

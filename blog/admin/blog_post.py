@@ -6,13 +6,15 @@
 .. author: Chris Bartlett <chris.bartlett@therealbuzzgroup.com>
 """
 from django.contrib import admin
+from django.urls import reverse
 from django.utils.timezone import now
 
 from blog.models.blog_post import BlogPost
+from common.mixins.admin import ViewOnSiteMixin
 
 
 @admin.register(BlogPost)
-class BlogPostAdmin(admin.ModelAdmin):
+class BlogPostAdmin(ViewOnSiteMixin, admin.ModelAdmin):
     """Admin class for BlogPost model."""
 
     fieldsets = (
@@ -92,3 +94,15 @@ class BlogPostAdmin(admin.ModelAdmin):
             f"Successfully updated {updated} "
             f"blog post{'' if updated == 1 else 's'}."
         )
+
+    def get_view_on_site_url(self, obj=None):
+        """
+        Override of BaseModelAdmin to return blog post url if available.
+
+        :param obj: blog post or None
+        :type obj: blog.models.blog_post.BlogPost or NoneType
+        """
+        if obj is None:
+            return None
+
+        return reverse('blog:post', kwargs={'slug': obj.slug})
