@@ -90,7 +90,7 @@ class BlogPost(EnabledMixin, TimeStampMixin, models.Model):
     @property
     def is_published(self):
         """
-        Is this blog post published?
+        Return whether this blog post is published.
 
         :return: whether this blog post is published
         :rtype: bool
