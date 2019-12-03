@@ -5,8 +5,6 @@
 .. module: blog.tests.test_blog_list
 .. author: Chris Bartlett <chris.bartlett@therealbuzzgroup.com>
 """
-from unittest import mock
-
 from django.test import RequestFactory, TestCase
 from django.utils.timezone import now
 from django_dynamic_fixture import G

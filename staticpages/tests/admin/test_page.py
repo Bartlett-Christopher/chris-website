@@ -5,11 +5,10 @@
 .. module: staticpages.tests.admin.test_page
 .. author: Chris Bartlett <chris.bartlett@therealbuzzgroup.com>
 """
-from unittest.mock import Mock, patch
+from unittest.mock import Mock
 
 from django.contrib import admin
 from django.test import TestCase
-from django.utils.safestring import SafeString
 
 from staticpages.admin.page import PageAdmin
 from staticpages.models.page import Page
