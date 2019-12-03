@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if not blog_post.is_published %}
+        <h1>DRAFT</h1>
+    {% endif %}
+
+    <h1>{{ blog_post.title }}</h1>
+    {{ blog_post.content|safe }}
+
+{% endblock content %}

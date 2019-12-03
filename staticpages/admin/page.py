@@ -6,13 +6,13 @@
 .. author: Chris Bartlett <chris.bartlett@therealbuzzgroup.com>
 """
 from django.contrib import admin
-from django.utils.safestring import mark_safe
 
+from common.mixins.admin import ViewOnSiteMixin
 from staticpages.models.page import Page
 
 
 @admin.register(Page)
-class PageAdmin(admin.ModelAdmin):
+class PageAdmin(ViewOnSiteMixin, admin.ModelAdmin):
     """Admin class for Page model."""
 
     fieldsets = (
@@ -38,8 +38,8 @@ class PageAdmin(admin.ModelAdmin):
         'template_name',
         'enabled',
         'modified',
-        'view_on_site'
     )
+
     list_filter = (
         'enabled',
     )
@@ -55,20 +55,6 @@ class PageAdmin(admin.ModelAdmin):
         'title',
         'content'
     )
-
-    def view_on_site(self, obj):
-        """
-        Construct link for the admin list view to view static page on the site.
-
-        :param obj: the static page object
-        :type obj: staticpages.models.Page
-        :return: link to view the static page
-        :rtype: django.utils.safestring.SafeText
-        """
-        link = f"<a href='{self.get_view_on_site_url(obj)}' target='_blank'>" \
-               f"View on site</a>"
-
-        return mark_safe(link)
 
     def get_view_on_site_url(self, obj=None):
         """
