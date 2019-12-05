@@ -1,4 +1,10 @@
 {% extends 'base.html' %}
+{% load django_bootstrap_breadcrumbs %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb 'Blogs' 'blog:list' %}
+{% endblock breadcrumbs %}
 
 {% block content %}
     <h1>Blogs</h1>

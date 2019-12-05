@@ -1,4 +1,4 @@
-{% load static %}
+{% load static django_bootstrap_breadcrumbs %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,6 +17,14 @@
     {% block navigation %}
         {% include 'common/navigation.html' %}
     {% endblock navigation %}
+
+    {% block breadcrumbs %}
+        <div>
+            {% include 'common/breadcrumbs.html' %}
+        </div>
+    {% endblock breadcrumbs %}
+
+    {% render_breadcrumbs %}
 
     {% block content %}
         <h1>CONTENT HERE</h1>

@@ -1,4 +1,10 @@
-{% extends 'base.html' %}
+{% extends 'blog/blog_list.html' %}
+{% load django_bootstrap_breadcrumbs %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    {% breadcrumb blog_post.title 'blog:post' %}
+{% endblock breadcrumbs %}
 
 {% block content %}
     {% if not blog_post.is_published %}

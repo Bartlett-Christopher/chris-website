@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     # third party
     'background_task',
     'ckeditor',
+    'django_bootstrap_breadcrumbs',
     'django_crontab',
 
     # project apps

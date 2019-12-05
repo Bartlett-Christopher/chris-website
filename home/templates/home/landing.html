@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{# Override breadcrumbs here so they don't show on home page #}
+{% block breadcrumbs %}
+{% endblock breadcrumbs %}
+
 {% block content %}
     <h1>Negative to Positive</h1>
 {% endblock content %}
