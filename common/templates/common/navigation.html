@@ -1,5 +1,7 @@
 {% block navigation %}
-    <a href="{% url 'home:landing' %}">Home</a>
-    <a href="{% url 'blog:list' %}">Blogs</a>
-    <a href="{% url 'home:enquiry' %}">Contact us</a>
+    <div class="nav-block">
+        <a class="nav-url" href="{% url 'home:landing' %}">Home</a>
+        <a class="nav-url" href="{% url 'blog:list' %}">Blogs</a>
+        <a class="nav-url" href="{% url 'home:enquiry' %}">Contact us</a>
+    </div>
 {% endblock navigation %}

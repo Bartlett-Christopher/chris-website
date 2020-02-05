@@ -10,24 +10,27 @@
     </title>
 
     {% block styles %}
-    <link rel="stylesheet" type="text/css" href="{% static 'home/css/home.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'home/css/home.css' %}">
     {% endblock styles %}
 </head>
-<body>
+<body class="body">
     {% block navigation %}
         {% include 'common/navigation.html' %}
     {% endblock navigation %}
 
     {% block breadcrumbs %}
-        <div>
+        <div class="bread_crumbs">
             {% include 'common/breadcrumbs.html' %}
         </div>
     {% endblock breadcrumbs %}
 
     {% render_breadcrumbs %}
 
-    {% block content %}
-        <h1>CONTENT HERE</h1>
-    {% endblock content %}
+    <div class="content">
+        {% block content %}
+            <h1>CONTENT HERE</h1>
+        {% endblock content %}
+    </div>
+
 </body>
 </html>

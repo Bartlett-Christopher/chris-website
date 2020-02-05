@@ -18,7 +18,8 @@ def collect_project_apps():
     """
     all_apps = set()
     for app in apps.get_app_configs():
-        if app.path.startswith(settings.PROJECT_DIR):
+        path = app.path
+        if path.startswith(settings.PROJECT_DIR) and '.venv' not in path:
             all_apps.add(app.name)
 
     return all_apps
