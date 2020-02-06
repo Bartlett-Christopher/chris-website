@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
-{% load static %}
+{% load static django_bootstrap_breadcrumbs %}
 
 {# Override breadcrumbs here so they don't show on home page #}
 {% block breadcrumbs %}
+    {% clear_breadcrumbs %}
 {% endblock breadcrumbs %}
 
 {% block content %}

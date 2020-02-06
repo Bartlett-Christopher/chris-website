@@ -10,10 +10,29 @@ body {
     margin: 0;
 }
 
-ul li {
+#banner {
+    padding: 0;
+}
+
+#breadcrumbs {
+    position: relative;
+    width: 100%;
+}
+
+.breadcrumb--list {
+    font-family: Roboto, sans-serif;
+    font-size: 14px;
+    height: 25px;
+    line-height: 25px;
+    background-color: #CCEDFF;
+}
+
+.breadcrumb--item {
     display: inline;
-    padding-right: 10px;
-/*    font: 100% Helvetica sans-serif;*/
+    padding-left: 25px;
+}
+.breadcrumb--item-divider {
+    padding-left: 25px;
 }
 
 a {
@@ -25,15 +44,21 @@ a {
     position: relative;
 }
 
-.nav-block {
+#nav {
     position: relative;
     height: 50px;
     width: 100%;
-    background-color: #CCEDFF;
+    background-color: #4180FE;
+    font-size: 16px;
+    padding: 0;
 }
 
-.nav-url {
-    padding-left: 30px;
-    padding-right: 30px;
+.nav--url {
+    padding-left: 25px;
+    padding-right: 25px;
     line-height: 50px;
+}
+
+#content {
+    font-size: 16px;
 }

@@ -182,3 +182,9 @@ EMAIL_DEBUG = False
 CRONJOBS = [
     ('*/15 * * * *', 'common.cron.process_background_tasks')
 ]
+
+# * - BREDCRUMBS - *
+BREADCRUMBS_TEMPLATE = os.path.join(
+    PROJECT_DIR,
+    'common/templates/common/breadcrumbs.html'
+)

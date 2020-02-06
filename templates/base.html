@@ -14,19 +14,25 @@
     {% endblock styles %}
 </head>
 <body class="body">
-    {% block navigation %}
-        {% include 'common/navigation.html' %}
-    {% endblock navigation %}
 
-    {% block breadcrumbs %}
-        <div class="bread_crumbs">
-            {% include 'common/breadcrumbs.html' %}
+    <div id="banner">
+
+         <div id="nav">
+            {% block navigation %}
+                {% include 'common/navigation.html' %}
+            {% endblock navigation %}
         </div>
-    {% endblock breadcrumbs %}
 
-    {% render_breadcrumbs %}
+        <div id="breadcrumbs">
+            {% block breadcrumbs %}
+                {% breadcrumb 'Home' 'home:landing' %}
+            {% endblock breadcrumbs %}
 
-    <div class="content">
+            {% render_breadcrumbs %}
+        </div>
+    </div>
+
+    <div id="content">
         {% block content %}
             <h1>CONTENT HERE</h1>
         {% endblock content %}

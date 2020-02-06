@@ -1,3 +1,14 @@
-{% load django_bootstrap_breadcrumbs %}
-
-{% breadcrumb 'Home' 'home:landing' %}
+<div class="breadcrumb--list">
+    {% for url, label in breadcrumbs %}
+        <div class="breadcrumb--item">
+            {% ifnotequal forloop.counter breadcrumbs_total %}
+                <a class="breadcrumb--item-link" href="{{ url }}">{{ label|safe }}</a>
+            {% else %}
+                {{ label|safe }}
+            {% endifnotequal %}
+            {% if not forloop.last %}
+                <span class="breadcrumb--item-divider">&gt;</span>
+            {% endif %}
+        </div>
+    {% endfor %}
+</div>
