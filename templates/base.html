@@ -16,20 +16,23 @@
 <body class="body">
 
     <div id="banner">
+        {% block banner %}
+            {% include 'common/banner.html' %}
+        {% endblock banner %}
+    </div>
 
-         <div id="nav">
-            {% block navigation %}
-                {% include 'common/navigation.html' %}
-            {% endblock navigation %}
-        </div>
+     <div id="nav">
+        {% block navigation %}
+            {% include 'common/navigation.html' %}
+        {% endblock navigation %}
+    </div>
 
-        <div id="breadcrumbs">
-            {% block breadcrumbs %}
-                {% breadcrumb 'Home' 'home:landing' %}
-            {% endblock breadcrumbs %}
+    <div id="breadcrumbs">
+        {% block breadcrumbs %}
+            {% breadcrumb 'Home' 'home:landing' %}
+        {% endblock breadcrumbs %}
 
-            {% render_breadcrumbs %}
-        </div>
+        {% render_breadcrumbs %}
     </div>
 
     <div id="content">
