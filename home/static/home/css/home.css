@@ -78,3 +78,16 @@ a {
 #content {
     font-size: 16px;
 }
+
+.blog {
+    width: 700px;
+    margin: auto;
+}
+
+.page--title {
+    text-align: center;
+}
+
+.blog--draft {
+    color: #F00;
+}

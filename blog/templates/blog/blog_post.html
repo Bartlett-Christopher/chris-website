@@ -7,11 +7,15 @@
 {% endblock breadcrumbs %}
 
 {% block content %}
-    {% if not blog_post.is_published %}
-        <h1>DRAFT</h1>
-    {% endif %}
+    <div class="blog">
+        {% if not blog_post.is_published %}
+            <h1 class="blog--title blog--draft">DRAFT</h1>
+        {% endif %}
 
-    <h1>{{ blog_post.title }}</h1>
-    {{ blog_post.content|safe }}
+        <h1 class="page--title">{{ blog_post.title }}</h1>
+        <div class="blog--content">
+            {{ blog_post.content|safe }}
+        </div>
+    </div>
 
 {% endblock content %}
