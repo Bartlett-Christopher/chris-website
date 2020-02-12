@@ -15,19 +15,19 @@
 </head>
 <body class="body">
 
-    <div id="banner">
+    <div class="banner">
         {% block banner %}
             {% include 'common/banner.html' %}
         {% endblock banner %}
     </div>
 
-     <div id="nav">
+     <div class="nav">
         {% block navigation %}
             {% include 'common/navigation.html' %}
         {% endblock navigation %}
     </div>
 
-    <div id="breadcrumbs">
+    <div class="breadcrumbs">
         {% block breadcrumbs %}
             {% breadcrumb 'Home' 'home:landing' %}
         {% endblock breadcrumbs %}
@@ -35,7 +35,7 @@
         {% render_breadcrumbs %}
     </div>
 
-    <div id="content">
+    <div class="content">
         {% block content %}
             <h1>CONTENT HERE</h1>
         {% endblock content %}

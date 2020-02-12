@@ -1,3 +1,7 @@
+/*
+SASS for home app
+
+*/
 h1 {
   color: #000;
   padding: 20px;
@@ -10,58 +14,43 @@ body {
   margin: 0;
 }
 
-#banner {
+a {
+  text-decoration: none;
+}
+
+.banner {
   height: 100px;
   line-height: 100px;
   font-size: 40px;
-}
-
-.banner--block {
-  font-size: 40px;
   background-color: #4180FE;
-}
-
-.banner--logo {
-  float: left;
   padding-left: 25px;
-}
-
-.banner--text {
   text-align: center;
 }
-
-#breadcrumbs {
+.banner__logo {
+  float: left;
+}
+.breadcrumbs {
   position: relative;
   width: 100%;
-}
-
-.breadcrumb--list {
   font-family: Roboto, sans-serif;
   font-size: 14px;
   height: 25px;
   line-height: 25px;
   background-color: #CCEDFF;
 }
-
-.breadcrumb--item {
+.breadcrumbs__item {
   display: inline;
   padding-left: 25px;
 }
-
-.breadcrumb--item-divider {
-  padding-left: 25px;
-}
-
-a {
+.breadcrumbs a {
   color: #000;
-  text-decoration: none;
 }
 
 .content {
   position: relative;
 }
 
-#nav {
+.nav {
   position: relative;
   height: 50px;
   width: 100%;
@@ -69,8 +58,7 @@ a {
   font-size: 16px;
   padding: 0;
 }
-
-.nav--url {
+.nav__url {
   padding-left: 25px;
   padding-right: 25px;
   line-height: 50px;
