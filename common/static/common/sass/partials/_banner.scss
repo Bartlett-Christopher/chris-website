@@ -1,0 +1,20 @@
+/*
+Banner
+*/
+
+// Imports
+@use "variable";
+
+.banner {
+  height: 100px;
+  line-height: 100px;
+  font-size: 40px;
+  background-color: variable.$primary-colour;
+  padding-left: 25px;
+  text-align: center;
+
+  &__logo {
+    float: left;
+  }
+
+}

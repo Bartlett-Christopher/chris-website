@@ -1,0 +1,27 @@
+/*
+Breadcrumbs
+*/
+
+// Imports
+@use "variable";
+
+$breadcrumb-colour: #CCEDFF;
+
+.breadcrumbs {
+  position: relative;
+  width: 100%;
+  font-family: variable.$font-stack;
+  font-size: 14px;
+  height: 25px;
+  line-height: 25px;
+  background-color: $breadcrumb-colour;
+
+  &__item {
+    display: inline;
+    padding-left: 25px;
+  }
+
+  a {
+    color: #000;
+  }
+}

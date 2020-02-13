@@ -1,5 +1,9 @@
 {% extends 'blog/blog_list.html' %}
-{% load django_bootstrap_breadcrumbs %}
+{% load django_bootstrap_breadcrumbs static %}
+
+{% block styles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/css/blog.css' %}">
+{% endblock styles %}
 
 {% block breadcrumbs %}
     {{ block.super }}
@@ -9,11 +13,11 @@
 {% block content %}
     <div class="blog">
         {% if not blog_post.is_published %}
-            <h1 class="blog--title blog--draft">DRAFT</h1>
+            <h1 class="content__title blog__draft-title">DRAFT</h1>
         {% endif %}
 
-        <h1 class="page--title">{{ blog_post.title }}</h1>
-        <div class="blog--content">
+        <h1 class="content__title">{{ blog_post.title }}</h1>
+        <div>
             {{ blog_post.content|safe }}
         </div>
     </div>

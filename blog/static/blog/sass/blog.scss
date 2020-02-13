@@ -1,0 +1,15 @@
+/*
+Blog sass styling
+*/
+
+// Imports
+@use "../../../../common/static/common/sass/base";
+
+.blog {
+    width: 700px;
+    margin: auto;
+}
+
+.blog__draft-title {
+    color: #F00;
+}

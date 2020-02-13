@@ -1,0 +1,29 @@
+/*
+Base sass styles
+*/
+
+// imports
+@use "partials/banner";
+@use "partials/breadcumbs";
+@use "partials/navigation";
+@use "partials/variable";
+
+body {
+  background-color: variable.$secondary-colour;
+  font-family: variable.$font-stack;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+.content {
+  position: relative;
+  font-size: 16px;
+
+  &__title {
+    text-align: center;
+  }
+}

@@ -8,4 +8,5 @@ db.sqlite3
 quality/config.txt
 quality/_coverage
 .venv
-static
+*.css*
+static/*

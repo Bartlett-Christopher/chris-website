@@ -1,0 +1,21 @@
+/*
+Navigation
+*/
+
+// imports
+@use "variable";
+
+.nav {
+  position: relative;
+  height: 50px;
+  width: 100%;
+  background-color: variable.$primary-colour;
+  font-size: 16px;
+  padding: 0;
+
+  &__url {
+    padding-left: 25px;
+    padding-right: 25px;
+    line-height: 50px;
+  }
+}
